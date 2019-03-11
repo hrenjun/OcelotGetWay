@@ -1,0 +1,33 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/values", //下游路径
+      "DownstreamScheme": "https", //下游协议
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        } //下游主机及端口，该部分为一个数组，包含若干个Host及Port配置,以上三个下游配置组成了下游路由的完整链接，配置的完整链接为：http://localhost:5001/api/values
+      ],
+      "UpstreamPathTemplate": "/webapia/values", //上游路径
+      "UpstreamHttpMethod": [ "Get" ]
+      //"上游使用的http方法，该部分为一个数组，包含若干个http方法，配置中使用的为get方法": null,
+      //"如此组成了一个路由配置，具体实现的功能为：当Ocelot网关接收到链接为http(s)": //yourdomain.com(:port)/webapia/values的get方法时转发到http://localhost:5001/api/values
+    },
+    {
+      "DownstreamPathTemplate": "/api/values",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/webapib/values",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ]
+
+}
+
+//ReRouteIsCaseSensitive  如果需要上游链接对大小写敏感可以添加ReRouteIsCaseSensitive属性，该属性默认为false
